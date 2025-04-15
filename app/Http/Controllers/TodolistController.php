@@ -14,7 +14,7 @@ class TodolistController extends Controller
      */
     public function index()
     {
-        return view('app');
+        return view('todolist/index');
     }
 
     /**
@@ -22,7 +22,7 @@ class TodolistController extends Controller
      */
     public function create()
     {
-        //
+        return view('todolist/create');
     }
 
     /**
@@ -44,9 +44,9 @@ class TodolistController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit()
     {
-        //
+        return view('todolist/edit');
     }
 
     /**
@@ -63,5 +63,10 @@ class TodolistController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function complete()
+    {
+        return view('todolist/complete');
     }
 }

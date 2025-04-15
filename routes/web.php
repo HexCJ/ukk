@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/', [TodolistController::class, 'index'])->name('index');
+Route::get('/create', [TodolistController::class, 'create'])->name('create');
+Route::get('/edit', [TodolistController::class, 'edit'])->name('edit');
+Route::get('/complete', [TodolistController::class, 'complete'])->name('complete');

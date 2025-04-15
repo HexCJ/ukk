@@ -1,0 +1,20 @@
+.card-outline-primary {
+    border: 1px solid var(--bs-primary);
+    background-color: white;
+    color: var(--bs-primary);
+    transition: all 0.3s ease;
+}
+
+.card-outline-primary:hover {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+.card-outline-primary:hover .bi {
+    color: white;
+}
+
+.card-outline-primary .bi {
+    color: var(--bs-primary);
+    transition: color 0.3s ease;
+}
