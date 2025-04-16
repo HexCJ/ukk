@@ -36,9 +36,9 @@ class TodolistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        return view('todolist/detail');
     }
 
     /**
@@ -68,5 +68,10 @@ class TodolistController extends Controller
     public function complete()
     {
         return view('todolist/complete');
+    }
+
+    public function cancel()
+    {
+        return view('todolist/cancel');
     }
 }

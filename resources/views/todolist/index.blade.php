@@ -14,12 +14,12 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="p-3 rounded card-outline-primary">
+            <div class="p-3 rounded card-outline-primary" onclick="window.location.href='{{route('cancel')}}'" style="cursor: pointer;">
                 <div class="d-flex align-items-center" style="height: 100px;">
                     <i class="bi bi-star fs-2 me-3"></i>
                     <div>
                         <div class="fs-5 fw-bold">10</div>
-                        <div class="small">Priority Task</div>
+                        <div class="small">Cancel Task</div>
                     </div>
                 </div>
             </div>
@@ -62,10 +62,10 @@
                     <form action="" method="GET">
                         @csrf
                         <div class="input-group mt-lg-2">
-                            <select name="" id="" class="form-select" style="width: 50px;">
+                            <select name="kategori" id="" class="form-select" style="width: 50px;">
                                 <option value="" selected disabled>Kategori</option>
-                                <option value="">Rumah</option>
-                                <option value="">Sekolah</option>
+                                <option value="1">Rumah</option>
+                                <option value="2">Sekolah</option>
                             </select>
                             <input type="text" class="form-control" name="cari"
                                 placeholder="Cari Task" value="{{ old('cari') }}">
@@ -110,13 +110,13 @@
                                 <select name="" id="" class="form-select">
                                     <option value="">Complete</option>
                                     <option value="">Progress</option>
-                                    <option value="">Cancle</option>
+                                    <option value="">Cancel</option>
                                 </select>
                             </form>
                         </td>
                         <td>
                             <a href="{{route('edit')}}" class="btn btn-outline-warning">Edit</a>
-                            <a href="{{route('edit')}}" class="btn btn-outline-primary">Detail</a>
+                            <a href="{{route('show')}}" class="btn btn-outline-primary">Detail</a>
                             <button class="btn btn-outline-danger" onclick="hapus()">
                                 Hapus
                             </button>
@@ -137,13 +137,13 @@
                                 <select name="" id="" class="form-select">
                                     <option value="1">Complete</option>
                                     <option value="2">Progress</option>
-                                    <option value="3">Cancle</option>
+                                    <option value="3">Cancel</option>
                                 </select>
                             </form>
                         </td>
                         <td>
                             <a href="{{route('edit')}}" class="btn btn-outline-warning">Edit</a>
-                            <a href="{{route('edit')}}" class="btn btn-outline-primary">Detail</a>
+                            <a href="{{route('show')}}" class="btn btn-outline-primary">Detail</a>
                             <button class="btn btn-outline-danger" onclick="hapus()">
                                 Hapus
                             </button>                        
@@ -164,13 +164,13 @@
                                 <select name="" id="" class="form-select">
                                     <option value="">Complete</option>
                                     <option value="">Progress</option>
-                                    <option value="">Cancle</option>
+                                    <option value="">Cancel</option>
                                 </select>
                             </form>
                         </td>
                         <td>
                             <a href="{{route('edit')}}" class="btn btn-outline-warning">Edit</a>
-                            <a href="{{route('edit')}}" class="btn btn-outline-primary">Detail</a>
+                            <a href="{{route('show')}}" class="btn btn-outline-primary">Detail</a>
                             <button class="btn btn-outline-danger" onclick="hapus()">
                                 Hapus
                             </button>                        
@@ -178,6 +178,11 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+                  70%
+                </div>
+            </div>
         </div>
     </div>
 </div>

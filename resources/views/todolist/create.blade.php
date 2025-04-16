@@ -15,35 +15,35 @@
                     <div class="row mt-2">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Task</label>
-                            <input type="text" name="" class="form-control" id="" value="" placeholder="Masukkan Task">
+                            <input type="text" name="task" class="form-control" id="" value="" placeholder="Masukkan Task">
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Deskripsi</label>
-                            <input type="text" name="" class="form-control" id="" value="" placeholder="Masukkan Deskripsi Task">
+                            <input type="text" name="deskripsi" class="form-control" id="" value="" placeholder="Masukkan Deskripsi Task">
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-sm-6">
-                            <label for="" class="form-label">Kategori</label>
-                            <select name="" class="form-select" id="">
+                            <label for="kategori" class="form-label">Kategori</label>
+                            <select name="kategori" class="form-select" id="">
                                 <option value="" selected disabled>Pilih Kategori</option>
-                                <option value="">Rumah</option>
-                                <option value="">Sekolah</option>
+                                <option value="1" {{old('kategori') == 1 ? 'selected' : ''}}>Rumah</option>
+                                <option value="2" {{old('kategori') == 2 ? 'selected' : ''}}>Sekolah</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Level Priority</label>
-                            <select name="" class="form-select" id="">
+                            <select name="level" class="form-select" id="">
                                 <option value="" selected disabled>Pilih Level Priority</option>
-                                <option value="">Low</option>
-                                <option value="">Medium</option>
-                                <option value="">High</option>
+                                <option value="1" {{old('level') == 1 ? 'selected' : ''}}>Low</option>
+                                <option value="2" {{old('level') == 2 ? 'selected' : ''}}>Medium</option>
+                                <option value="3" {{old('level') == 3 ? 'selected' : ''}}>High</option>
                             </select>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <label for="" class="form-label">Deadline</label>
-                        <input type="date" name="" class="form-control">
+                        <input type="date" name="deadline" class="form-control">
                     </div>
                     <div class="row mt-2">
                         <div class="d-flex justify-content-center gap-2">

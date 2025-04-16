@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-6 margin-tb">
                 <div class="pull-left mt-2">
-                    <h5>Daftar To Do List Complete</h5>
+                    <h5>Daftar To Do List Cancel</h5>
                 </div>
             </div>
             <div class="col-lg-6 margin-tb">
