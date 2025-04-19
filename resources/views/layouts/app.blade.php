@@ -9,7 +9,7 @@
     <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/bs5/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/sweetalert2.all.min.js') }}"></script>
-    {{-- <link rel="stylesheet" href="{{ asset('assets/bs5/icons/bootstrap-icons.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('assets/font/bootstrap-icons.css') }}">
     <title>To Do List</title>
 </head>
 <body>
