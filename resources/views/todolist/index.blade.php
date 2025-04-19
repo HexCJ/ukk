@@ -16,7 +16,7 @@
         <div class="col-md-3">
             <div class="p-3 rounded card-outline-primary" onclick="window.location.href='{{route('cancel')}}'" style="cursor: pointer;">
                 <div class="d-flex align-items-center" style="height: 100px;">
-                    <i class="bi bi-star fs-2 me-3"></i>
+                    <i class="bi-x-octagon fs-2 me-3"></i>
                     <div>
                         <div class="fs-5 fw-bold">10</div>
                         <div class="small">Cancel Task</div>
@@ -27,7 +27,7 @@
         <div class="col-md-3">
             <div class="p-3 rounded card-outline-primary">
                 <div class="d-flex align-items-center" style="height: 100px;">
-                    <i class="bi bi-list-task fs-2 me-3"></i>
+                    <i class="bi-hourglass-split fs-2 me-3"></i>
                     <div>
                         <div class="fs-5 fw-bold">5</div>
                         <div class="small">Ongoing Task</div>
@@ -38,7 +38,7 @@
         <div class="col-md-3">
             <div class="p-3 rounded card-outline-primary">
                 <div class="d-flex align-items-center" style="height: 100px;">
-                    <i class="bi bi-exclamation-circle fs-2 me-3"></i>
+                    <i class="bi bi-calendar-x fs-2 me-3"></i>
                     <div>
                         <div class="fs-5 fw-bold">3</div>
                         <div class="small">Overdue Task</div>
@@ -71,10 +71,9 @@
                                 placeholder="Cari Task" value="{{ old('cari') }}">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-outline-success btn-outline-oke" type="button">
-                                    {{-- <i class="fa-solid fa-magnifying-glass"></i> --}}
-                                    Cari
+                                    <i class="bi bi-search"></i>
                                 </button>
-                                <a href="{{route('create')}}" class="btn btn-outline-success btn-outline-oke">Tambah</a>
+                                <a href="{{route('create')}}" class="btn btn-outline-success btn-outline-oke"><i class="bi bi-plus me-1"></i>Tambah</a>
                             </div>
                         </div>
                     </form>
@@ -90,7 +89,7 @@
                         <th class="text-center">Deadline</th>
                         <th style="width: 180px;" class="text-center">Priority Level</th>
                         <th style="width: 180px;" class="text-center">Progress</th>
-                        <th style="width: 280px;" class="text-center">Aksi</th>
+                        <th style="width: 160px;" class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -115,10 +114,10 @@
                             </form>
                         </td>
                         <td>
-                            <a href="{{route('edit')}}" class="btn btn-outline-warning">Edit</a>
-                            <a href="{{route('show')}}" class="btn btn-outline-primary">Detail</a>
+                            <a href="{{route('edit')}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{{route('show')}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
                             <button class="btn btn-outline-danger" onclick="hapus()">
-                                Hapus
+                                <i class="bi bi-trash"></i>
                             </button>
                         </td>
                     </tr>
@@ -142,10 +141,10 @@
                             </form>
                         </td>
                         <td>
-                            <a href="{{route('edit')}}" class="btn btn-outline-warning">Edit</a>
-                            <a href="{{route('show')}}" class="btn btn-outline-primary">Detail</a>
+                            <a href="{{route('edit')}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{{route('show')}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
                             <button class="btn btn-outline-danger" onclick="hapus()">
-                                Hapus
+                                <i class="bi bi-trash"></i>
                             </button>                        
                         </td>
                     </tr>
@@ -169,10 +168,10 @@
                             </form>
                         </td>
                         <td>
-                            <a href="{{route('edit')}}" class="btn btn-outline-warning">Edit</a>
-                            <a href="{{route('show')}}" class="btn btn-outline-primary">Detail</a>
+                            <a href="{{route('edit')}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{{route('show')}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
                             <button class="btn btn-outline-danger" onclick="hapus()">
-                                Hapus
+                                <i class="bi bi-trash"></i>
                             </button>                        
                         </td>
                     </tr>
