@@ -11,37 +11,61 @@
                     </div>
                 </div>
                     <div class="row mt-2">
-                        <div class="col-sm-6">
+                        <div class="col-1">
                             <label for="" class="form-label">Task</label>
-                            <input type="text" name="task" class="form-control" id="" value="" placeholder="Masukkan Task" readonly>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-6">
+                            <label for="" class="form-label">: {{$data->task}}</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-1">
                             <label for="" class="form-label">Deskripsi</label>
-                            <input type="text" name="deskripsi" class="form-control" id="" value="" placeholder="Masukkan Deskripsi Task" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">: {{$data->deskripsi}}</label>
                         </div>
                     </div>
+                    @php
+                        $kategori = '';
+                        if ($data->kategori == 1) {
+                            $kategori = 'Rumah';
+                        } elseif ($data->kategori == 2){
+                            $kategori = 'Sekolah';
+                        }
+
+                        $level = '';
+                        if($data->level == 1){
+                            $level = 'Low';
+                        } elseif ($data->level == 2){
+                            $level = 'Medium';
+                        } elseif ($data->level == 3){
+                            $level = 'High';
+                        }
+                    @endphp
                     <div class="row mt-2">
-                        <div class="col-sm-6">
+                        <div class="col-1">
                             <label for="" class="form-label">Kategori</label>
-                            <select name="kategori" class="form-select" id="" disabled>
-                                <option value="" selected disabled>Pilih Kategori</option>
-                                <option value="1">Rumah</option>
-                                <option value="2">Sekolah</option>
-                            </select>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="" class="form-label">Level Priority</label>
-                            <select name="level" class="form-select" id="" disabled>
-                                <option value="" selected disabled>Pilih Level Priority</option>
-                                <option value="1">Low</option>
-                                <option value="2">Medium</option>
-                                <option value="3">High</option>
-                            </select>
+                        <div class="col-6">
+                            <label for="" class="form-label">: {{$kategori}}</label>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <label for="" class="form-label">Deadline</label>
-                        <input type="date" name="deadline" class="form-control" readonly>
+                        <div class="col-1">
+                            <label for="" class="form-label">Level</label>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">: {{$level}}</label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-1">
+                            <label for="" class="form-label">Deadline</label>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">: {{\Carbon\Carbon::parse($data->deadline)->format('d-m-Y')}}</label>
+                        </div>
                     </div>
                     <div class="row mt-2">
                         <div class="d-flex justify-content-center gap-2">

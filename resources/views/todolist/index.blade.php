@@ -7,7 +7,7 @@
                 <div class="d-flex align-items-center" style="height: 100px;">
                     <i class="bi bi-check-circle fs-2 me-3"></i>
                     <div>
-                        <div class="fs-5 fw-bold">10</div>
+                        <div class="fs-5 fw-bold">{{$done}}</div>
                         <div class="small">Complete Task</div>
                     </div>
                 </div>
@@ -18,7 +18,7 @@
                 <div class="d-flex align-items-center" style="height: 100px;">
                     <i class="bi-x-octagon fs-2 me-3"></i>
                     <div>
-                        <div class="fs-5 fw-bold">10</div>
+                        <div class="fs-5 fw-bold">{{$cancel}}</div>
                         <div class="small">Cancel Task</div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="d-flex align-items-center" style="height: 100px;">
                     <i class="bi-hourglass-split fs-2 me-3"></i>
                     <div>
-                        <div class="fs-5 fw-bold">5</div>
+                        <div class="fs-5 fw-bold">{{$progress}}</div>
                         <div class="small">Ongoing Task</div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="d-flex align-items-center" style="height: 100px;">
                     <i class="bi bi-calendar-x fs-2 me-3"></i>
                     <div>
-                        <div class="fs-5 fw-bold">3</div>
+                        <div class="fs-5 fw-bold">{{$over}}</div>
                         <div class="small">Overdue Task</div>
                     </div>
                 </div>
@@ -48,7 +48,13 @@
         </div>
     </div>
 </div>
-
+<div class="container-fluid mt-4">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{$bar}}%;" aria-valuenow="{{$bar}}" aria-valuemin="0" aria-valuemax="100">
+          {{$bar}}%
+        </div>
+    </div>
+</div>
 <div class="card mt-3">
     <div class="card-body">
         <div class="row">
@@ -59,7 +65,7 @@
             </div>
             <div class="col-lg-6 margin-tb">
                 <div class="pull-right">
-                    <form action="" method="GET">
+                    <form action="{{route('index')}}" method="GET">
                         @csrf
                         <div class="input-group mt-lg-2">
                             <select name="kategori" id="" class="form-select" style="width: 50px;">
@@ -86,6 +92,7 @@
                     <tr>
                         <th style="width: 40px;" class="text-center">No</th>
                         <th style="width: 900px;" class="text-center">Task</th>
+                        <th style="width: 300px;" class="text-center">SubTask</th>
                         <th class="text-center">Deadline</th>
                         <th style="width: 180px;" class="text-center">Priority Level</th>
                         <th style="width: 180px;" class="text-center">Progress</th>
@@ -93,95 +100,79 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($data as $item)
+                    @php
+                        $level = '';
+                        if($item->level == 1){
+                            $level = 'Low';
+                        } elseif ($item->level == 2){
+                            $level = 'Medium';
+                        } elseif ($item->level == 3){
+                            $level = 'High';
+                        }
+
+                        $bg = '';
+                        $now = \Carbon\Carbon::now()->parse();
+                        $deadline = \Carbon\Carbon::parse($item->deadline);
+                        if ($deadline->isPast()) {
+                            $bg = 'text-white bg-danger';
+                        } elseif ($now->diffInDays($deadline) <= 3)
+                        {
+                            $bg = 'text-white bg-warning';
+                        }
+                    @endphp
+                        
                     <tr>
-                        <td class="text-center">1</td>
-                        <td>
-                            Mengerjakan Soal Ukk
+                        <td class="text-center">{{$loop->iteration}}</td>
+                        <td style="padding: 5px;">
+                            <p style="font-size: 17px;  margin: 0px;">
+                                {{$item->task}}
+                            </p>
                             <li>
-                                Mengerjakan Soal UKK Pengetahuan dan Praktik Web To Do List agar mendapat nilai Terbaik
+                                {{$item->deskripsi}} 
                             </li>
                         </td>
-                        <td>22/04/2025</td>
-                        <td class="text-center">High</td>
                         <td>
-                            <form action="" method="POST">
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($item->subtask as $sub)
+                            @php
+                                $a = $i++;
+                            @endphp
+                            <ul style="padding: 1px; margin: 0px;">
+                                <li style="list-style: none;">
+                                    {{$a}}. {{$sub->task}}
+                                </li>
+                            </ul>
+                            @endforeach
+                        </td>
+                        <td class="{{$bg}}" style="white-space: nowrap">{{\Carbon\Carbon::parse($item->deadline)->format('d-m-Y')}}</td>
+                        <td class="text-center">{{$level}}</td>
+                        <td>
+                            <form action="{{route('status', $item->id)}}" method="POST">
                                 @csrf
-                                <select name="" id="" class="form-select">
-                                    <option value="">Complete</option>
-                                    <option value="">Progress</option>
-                                    <option value="">Cancel</option>
+                                @method('PUT')
+                                <select name="status" id="" class="form-select" onchange="this.form.submit()">
+                                    <option value="" {{$item->status == 0 ? 'selected' : ''}} disabled>New</option>
+                                    <option value="2" {{$item->status == 2 ? 'selected' : ''}}>Complete</option>
+                                    <option value="1" {{$item->status == 1 ? 'selected' : ''}}>Progress</option>
+                                    <option value="3" {{$item->status == 3 ? 'selected' : ''}}>Cancel</option>
                                 </select>
                             </form>
                         </td>
-                        <td>
-                            <a href="{{route('edit')}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
-                            <a href="{{route('show')}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
-                            <button class="btn btn-outline-danger" onclick="hapus()">
+                        <td style="white-space: nowrap;">
+                            <a href="{{route('edit', $item->id)}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
+                            <a href="{{route('show', $item->id)}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
+                            <button class="btn btn-outline-danger" onclick="hapus({{$item->id}})">
                                 <i class="bi bi-trash"></i>
                             </button>
+                            <a href="{{route('subtask', $item->id)}}" class="btn btn-outline-primary"><i class="bi bi-plus-circle"></i></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="text-center">2</td>
-                        <td>Belajar React JS
-                            <li>
-                                Agar bisa mengerjakan projek berbasis React JS
-                            </li>
-                        </td>
-                        <td>30/04/2025</td>
-                        <td class="text-center">Medium</td>
-                        <td>
-                            <form action="" method="POST">
-                                @csrf
-                                <select name="" id="" class="form-select">
-                                    <option value="1">Complete</option>
-                                    <option value="2">Progress</option>
-                                    <option value="3">Cancel</option>
-                                </select>
-                            </form>
-                        </td>
-                        <td>
-                            <a href="{{route('edit')}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
-                            <a href="{{route('show')}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
-                            <button class="btn btn-outline-danger" onclick="hapus()">
-                                <i class="bi bi-trash"></i>
-                            </button>                        
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">3</td>
-                        <td>Belajar Java
-                            <li>
-                                Agar bisa mengerjakan projek berbasis Java
-                            </li>
-                        </td>
-                        <td>05/05/2025</td>
-                        <td class="text-center">Low</td>
-                        <td>
-                            <form action="" method="POST">
-                                @csrf
-                                <select name="" id="" class="form-select">
-                                    <option value="">Complete</option>
-                                    <option value="">Progress</option>
-                                    <option value="">Cancel</option>
-                                </select>
-                            </form>
-                        </td>
-                        <td>
-                            <a href="{{route('edit')}}" class="btn btn-outline-warning"><i class="bi bi-pencil-square"></i></a>
-                            <a href="{{route('show')}}" class="btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
-                            <button class="btn btn-outline-danger" onclick="hapus()">
-                                <i class="bi bi-trash"></i>
-                            </button>                        
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
-            </table>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                  70%
-                </div>
-            </div>
+            </table>       
         </div>
     </div>
 </div>
@@ -198,8 +189,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <form id="delete-form" action="" method="POST">
+                <form id="delete-form" action="{{route('destroy')}}" method="POST">
                     @csrf
+                    @method('POST')
                     <input type="hidden" name="id" id="idhapus">
                     <button type="submit" class="btn btn-outline-danger">Hapus</button>
                 </form>
@@ -208,8 +200,9 @@
     </div>
 </div>
 <script>
-    function hapus(){
+    function hapus(id){
         $('#deleteModal').modal('show');
+        $('#idhapus').val(id);
     }
 </script>
 @endsection

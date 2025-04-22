@@ -10,7 +10,7 @@
             </div>
             <div class="col-lg-6 margin-tb">
                 <div class="pull-right">
-                    <form action="" method="GET">
+                    <form action="{{route('cancel')}}" method="GET">
                         @csrf
                         <div class="input-group mt-lg-2">
                             <select name="kategori" id="" class="form-select" style="width: 50px;">
@@ -44,22 +44,35 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($data as $item)
+                    @php
+                        $level = '';
+                        if($item->level == 1){
+                            $level = 'Low';
+                        } elseif ($item->level == 2){
+                            $level = 'Medium';
+                        } elseif ($item->level == 3){
+                            $level = 'High';
+                        }
+                    @endphp
+                        
                     <tr>
-                        <td class="text-center">1</td>
+                        <td class="text-center">{{$loop->iteration}}</td>
                         <td>
-                            Mengerjakan Soal Ukk
+                            {{$item->task}}
                             <li>
-                                Mengerjakan Soal UKK Pengetahuan dan Praktik Web To Do List agar mendapat nilai Terbaik
+                                {{$item->deskripsi}}
                             </li>
                         </td>
-                        <td class="text-center">22/04/2025</td>
-                        <td class="text-center">High</td>
+                        <td>{{\Carbon\Carbon::parse($item->deadline)->format('d-m-Y')}}</td>
+                        <td class="text-center">{{$level}}</td>
                         <td class="text-center">
-                            <button class="btn btn-outline-danger" onclick="hapus()">
-                                Hapus
+                            <button class="btn btn-outline-danger" onclick="hapus({{$item->id}})">
+                                <i class="bi bi-trash"></i>
                             </button>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -78,8 +91,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <form id="delete-form" action="" method="POST">
+                <form id="delete-form" action="{{route('destroy')}}" method="POST">
                     @csrf
+                    @method('POST')
                     <input type="hidden" name="id" id="idhapus">
                     <button type="submit" class="btn btn-outline-danger">Hapus</button>
                 </form>
@@ -88,8 +102,9 @@
     </div>
 </div>
 <script>
-    function hapus(){
+    function hapus(id){
         $('#deleteModal').modal('show');
+        $('#idhapus').val(id);
     }
 </script>
 @endsection

@@ -10,16 +10,23 @@
                         </div>
                     </div>
                 </div>
-                <form action="" method="POST">
+                <form action="{{route('store')}}" method="POST">
                     @csrf    
+                    @method('POST')
                     <div class="row mt-2">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Task</label>
-                            <input type="text" name="task" class="form-control" id="" value="" placeholder="Masukkan Task">
+                            <input type="text" name="task" class="form-control" id="" value="{{old('task')}}" placeholder="Masukkan Task">
+                            @error('task')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Deskripsi</label>
-                            <input type="text" name="deskripsi" class="form-control" id="" value="" placeholder="Masukkan Deskripsi Task">
+                            <input type="text" name="deskripsi" class="form-control" id="" value="{{old('deskripsi')}}" placeholder="Masukkan Deskripsi Task">
+                            @error('deskripsi')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mt-2">
@@ -30,6 +37,9 @@
                                 <option value="1" {{old('kategori') == 1 ? 'selected' : ''}}>Rumah</option>
                                 <option value="2" {{old('kategori') == 2 ? 'selected' : ''}}>Sekolah</option>
                             </select>
+                            @error('kategori')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Level Priority</label>
@@ -39,11 +49,19 @@
                                 <option value="2" {{old('level') == 2 ? 'selected' : ''}}>Medium</option>
                                 <option value="3" {{old('level') == 3 ? 'selected' : ''}}>High</option>
                             </select>
+                            @error('level')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <label for="" class="form-label">Deadline</label>
-                        <input type="date" name="deadline" class="form-control">
+                        <div class="col-sm-12">
+                            <label for="" class="form-label">Deadline</label>
+                            <input type="date" name="deadline" value="{{old('deadline')}}" class="form-control">
+                            @error('deadline')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row mt-2">
                         <div class="d-flex justify-content-center gap-2">
